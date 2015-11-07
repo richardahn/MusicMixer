@@ -1,4 +1,3 @@
-
 #include "MusicbrainzFetcher.h"
 #include "SongNamesFetcher.h"
 #include "SongNamesFetcherHandler.h"
@@ -11,25 +10,36 @@ extern "C" {
 #include <libavformat\avformat.h>
 }
 
+/**
+ * @author Richard Ahn <richardahn.net>
+ * @version 1.0
+ * @since 11/6/2015
+ */
 using namespace boost::asio;
 using namespace boost::asio::ip;
 
+
+/**
+* 
+*
+* @param  
+* @return 
+*/
 int main(int argc, char* argv[])
 {
+	// I'm currently obtaining data synchronously but I'm still using io_service if I want 
+	// to have asynchronous functionality
 	io_service ios;
-	// have a handler for this
+
+	// Get the list of songs
 	SongNamesFetcherHandler snfh(ios);
-
-
-	
-
-
-
-	// Get list of songs
 	std::vector<Song> songs = snfh.FetchSongNames("SNSD"); // Works for Sia, BIGBANG, SNSD, One Direction
+
+	// DEBUG: Print the list of songs
 	for (Song s : songs) {
 		std::cout << s.ToString() << std::endl;
 	}
+
 	// Fix list of songs
 	
 	// Download list of songs from Soundcloud, Youtube, etc...
